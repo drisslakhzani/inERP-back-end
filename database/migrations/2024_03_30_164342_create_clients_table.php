@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->string('user_name');
+            $table->string('generated_code')->unique()->nullable(); 
+            $table->string('company_name');
             $table->timestamps();
         });
-    }
-
+    } 
     /**
      * Reverse the migrations.
      */
@@ -24,4 +26,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('clients');
     }
-};
+}; 

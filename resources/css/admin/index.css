@@ -1,0 +1,60 @@
+.adminForm {
+    @apply w-[300px] min-h-[320px] flex flex-col items-center bg-white shadow-lg rounded-lg py-10 gap-6
+}
+
+.adminInput {
+    @apply w-10/12 h-12 bg-slate-200 rounded-sm pl-2 outline-none
+}
+
+.connectBtn {
+    @apply w-10/12 rounded-full h-11 bg-sky-600 hover:bg-sky-500 text-white
+}
+
+.add:hover h1, .add:hover p {
+    @apply text-gray-900 cursor-pointer
+}
+
+nav div.active {
+    @apply bg-white rounded-tl-full rounded-bl-full text-sky-900 font-medium relative
+}
+
+nav div.active::before,
+nav div.active::after {
+    border-radius: 1rem;
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 0rem;
+    background: #498D13;
+}
+
+nav div.active::before {
+    border-radius: 0 0 1rem;
+    bottom: 3rem;
+    box-shadow: 5px 5px 0 5px white;
+}
+
+nav div.active::after {
+    border-radius: 0 1rem 0 0;
+    top: 3rem;
+    box-shadow: 5px -5px 0 5px white;
+}
+
+
+/* /////////////////// NAV /////////////////// */
+.mobileNavContainer {
+    @apply md:hidden w-full h-14 bg-sky-900 flex justify-between items-center px-5 sm:px-16 mb-5 text-white;
+}
+
+.mobileNavContainer h1 {
+    @apply uppercase text-center text-xl font-medium;
+}
+
+/* this is for the table  */
+.bg-even {
+    background-color: rgb(203, 196, 196);
+}
+.bg-odd {
+    background-color: rgb(229, 230, 230);
+}

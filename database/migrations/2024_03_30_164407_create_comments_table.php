@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->longText('content');
+            $table->smallInteger('rating'); 
+            $table->foreignId('users_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

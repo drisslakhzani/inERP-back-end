@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
+            $table->text('service_needed');
+            $table->foreignId('clients_id')->constrained()->cascadeOnDelete();
+            $table->boolean('status');
             $table->timestamps();
         });
     }
