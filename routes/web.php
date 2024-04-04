@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Client;
-use App\Models\Request as ModelsRequest;
+use App\Models\ClientRequest as ModelsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,9 +9,24 @@ use Illuminate\Support\Facades\Route;
 //     return view('admin.index');
 // });
 
-Route::get('/admin/dashboard/clients', function (Client $clients, ModelsRequest $request) {
-    $clients = Client::all();
-    return view('admin.index', ['clients'=> $clients ,'requests'=>$request]);
-});
+Route::get('/admin/dashboard/clients', function () {
+
+    $new_clients = Client::whereHas('clientRequests', function ($query) {
+        $query->where('status', false);
+    })->get();
+    $all_clients = Client::whereHas('clientRequests', function ($query) {
+        $query->where('status', true);
+    })->get();
+    
+    return view('admin.index', ['new_clients' => $new_clients , 'all_clients' =>$all_clients]);
+})->name('clients.all');
+
+
+Route::get('/admin/dashboard/clients/{client}', function ($clientId) {
+    $client = Client::findOrFail($clientId);
+    $requests = ModelsRequest::where('clients_id', $clientId)->get();
+    return view('admin.client', ['client' => $client, 'requests' => $requests]);
+})->name('clients.individual');
+
 
 

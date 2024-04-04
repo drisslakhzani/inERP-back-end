@@ -11,6 +11,11 @@ class Client extends Model
 
     protected $fillable = ['user_name', 'generated_code','company_name'];
 
+    public function clientRequests()
+    {
+        return $this->hasMany(ClientRequest::class,'clients_id');
+    }
+
     public static function RandomizeCode(){
         $generated_code=Str::random(30);
         return $generated_code;
