@@ -1,3 +1,9 @@
+@import '@fortawesome/fontawesome-free/css/fontawesome.css';
+@import '@fortawesome/fontawesome-free/css/regular.css';
+@import '@fortawesome/fontawesome-free/css/solid.css';
+@import '@fortawesome/fontawesome-free/css/brands.css';
+
+
 .adminForm {
     @apply w-[300px] min-h-[320px] flex flex-col items-center bg-white shadow-lg rounded-lg py-10 gap-6
 }
