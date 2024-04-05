@@ -76,10 +76,19 @@
                                                 <td class="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900">{{ $service }}</td>
                                                 <td class="px-4 py-2 text-center whitespace-nowrap text-sm text-gray-600">{{ $values[0] }}</td>
                                                 <td class="px-4 py-2 text-center whitespace-nowrap text-sm text-gray-600">{{ $values[1] }}</td>
+                                                
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <form action="{{ route('requests.toggle-status', ['clientId' => $client->id, 'requestId' => $request->id]) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300 ease-in-out">
+                                        <span class="mr-1">{{ $request->status ? 'Active' : 'Inactive' }}</span>
+                                    </button>
+                                </form>
+                                
+                                
                             </div>
                         </div>
                     @endforeach
@@ -111,6 +120,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                
                             </div>
                         </div>
                     @endforeach

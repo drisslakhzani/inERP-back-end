@@ -1,9 +1,15 @@
 <?php
 
+
+
 use App\Models\Client;
 use App\Models\ClientRequest as ModelsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+
+
+
 
 // Route::get('/', function (Request $request) {
 //     return view('admin.index');
@@ -27,6 +33,10 @@ Route::get('/admin/dashboard/clients/{client}', function ($clientId) {
     $requests = ModelsRequest::where('clients_id', $clientId)->get();
     return view('admin.client', ['client' => $client, 'requests' => $requests]);
 })->name('clients.individual');
+
+Route::post('/admin/dashboard/clients/{clientId}/requests/{requestId}/toggle-status', [AdminController::class, 'toggleRequestStatus'])->name('requests.toggle-status');
+
+
 
 
 

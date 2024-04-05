@@ -69,7 +69,7 @@
                                 
                                 <tbody>
                                     @foreach ($new_clients as $index => $client )
-                                        <tr class="cursor-pointer hover:bg-[#498D13] hover:text-white duration-150" 
+                                        <tr class="cursor-pointer hover:bg-[#498D13] hover:text-white duration-100" 
                                             x-data="{ odd: {{ $index % 2 === 1 ? 'true' : 'false' }} }" 
                                             :class="{ 'bg-gray-100': odd }">
                                             <td class="border px-4 py-2">
@@ -113,7 +113,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($all_clients as $index => $client)
-                                    <tr class="cursor-pointer hover:bg-[#498D13] hover:text-white duration-150" 
+                                    <tr class="cursor-pointer hover:bg-[#498D13] hover:text-white duration-100" 
                                         x-data="{ odd: {{ $index % 2 === 1 ? 'true' : 'false' }} }" 
                                         :class="{ 'bg-gray-100': odd }">
                                         <td class="border px-4 py-2">
