@@ -8,33 +8,32 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ClientRequestFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ClientRequest::class;
+
+    /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array
      */
-    public function definition(): array
+    public function definition()
     {
-        $numSentences = $this->faker->numberBetween(1, 5);
-        
-        // Generate an array of random sentences with values between 1 and 100
-        $services = [];
-        for ($i = 0; $i < $numSentences; $i++) {
-            $service = $this->faker->sentence();
-            $values = [
-                $this->faker->numberBetween(1, 100),
-                $this->faker->numberBetween(1, 100),
-            ];
-            $services[$service] = $values;
+        // Generate an array of sentences (5 sentences)
+        $selectedSolutions = [];
+        for ($i = 0; $i < 5; $i++) {
+            $selectedSolutions[] = $this->faker->sentence();
         }
 
         return [
-            'clients_id' => null,
-            'sage' => json_encode($services),
-            'infrastructure' => json_encode($services),
-            'microsoft' => json_encode($services),
-            'material' => json_encode($services), 
-            'status' => fake()->boolean(),
+            'selectedSolutions' => $selectedSolutions,
+            'solutionType' => $this->faker->word(),
+            'clients_id' => function () {
+                return \App\Models\Client::factory()->create()->id;
+            },
+            'status' => $this->faker->boolean(),
         ];
     }
 }
-

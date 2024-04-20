@@ -15,10 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Client::factory(10)->create()->each(function($book){
-            ClientRequest::factory()->for($book)->create();
-        });
-        
+        Client::factory(10)->create();
+        ClientRequest::factory(5)->create();
+
 
         // User::factory()->create([
         //     'name' => 'Test User',
