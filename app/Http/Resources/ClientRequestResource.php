@@ -20,7 +20,6 @@ class ClientRequestResource extends JsonResource
             'solutionType'=>$this->solutionType,
             'clients_id'=>$this->clients_id,
             'status'=>$this->status,
-            'generatedCode'=>$this->generatedCode
         ];
     }
 }

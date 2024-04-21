@@ -14,15 +14,11 @@ class Client extends Model
         'companyName',
         'phoneNumber',
         'email',
+        'generatedCode'
     ];
 
     public function clientRequests()
     {
         return $this->hasMany(ClientRequest::class,'clients_id');
-    }
-
-    public static function RandomizeCode(){
-        $generated_code=Str::random(30);
-        return $generated_code;
     }
 }

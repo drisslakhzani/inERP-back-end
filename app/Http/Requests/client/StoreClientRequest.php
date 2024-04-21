@@ -26,6 +26,7 @@ class StoreClientRequest extends FormRequest
             'companyName' => 'required|string',
             'phoneNumber' => 'required|string',
             'email' => 'required|email',
+            'generatedCode' => 'required|string',
 
         ];
     }

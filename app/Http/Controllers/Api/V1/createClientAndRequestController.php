@@ -23,7 +23,8 @@ class createClientAndRequestController extends Controller
 
         try {
             // Create the client
-            $client = Client::create($request->input('clientData'));
+            $clientData = $request->input('clientData');
+            $client = Client::create($clientData);
 
             // Attach the client ID to the request details
             $requestDetails = $request->input('requestDetails');
@@ -46,3 +47,4 @@ class createClientAndRequestController extends Controller
         }
     }
 }
+

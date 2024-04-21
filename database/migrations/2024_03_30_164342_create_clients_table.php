@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('companyName');
             $table->string('phoneNumber');
             $table->string('email');
-            $table->string('generatedCode')->nullable();
+            $table->string('generatedCode');
             $table->timestamps();
         });
     }
