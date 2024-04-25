@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('client_requests', function (Blueprint $table) {
             $table->id();
             $table->json('selectedSolutions');
-            $table->json('solutionType');
+            $table->string('solutionType');
             $table->foreignId('clients_id')->constrained()->cascadeOnDelete();
             $table->boolean('status')->default(false);
             $table->timestamps();

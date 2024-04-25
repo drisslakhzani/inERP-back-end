@@ -45,10 +45,14 @@ class AuthController extends Controller
                 ], 401);
             }
 
+            // Generate token
+            $token = $client->createToken('API_TOKEN')->plainTextToken;
+
             return response()->json([
                 'status' => true,
                 'message' => 'Login successful',
-                'token' => $client->createToken('API_TOKEN')->plainTextToken,
+                'clientId' => $client->id,
+                'token' => $token,
             ], 200);
         } catch (\Throwable $exception) {
             return response()->json([

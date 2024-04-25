@@ -25,10 +25,24 @@ class ClientController extends Controller
         return response()->json($client, 201);
     }
 
-    public function update(UpdateClientRequest $request, Client $client){
-        $client->update($request->validated());
-        return ClientResource::make($client);
+    public function update(UpdateClientRequest $request, $id)
+    {
+        try {
+            // Find the client
+            $client = Client::findOrFail($id);
+
+            // Update client data
+            $client->update($request->validated());
+
+            // Update client requests if needed
+
+            return response()->json(['message' => 'Client data updated successfully', 'client' => $client]);
+        } catch (\Exception $e) {
+            // Handle validation errors
+            return response()->json(['error' => $e->getMessage()], 422);
+        }
     }
+
     public function destroy(Client $client){
         $client->delete();
         return response()->noContent();

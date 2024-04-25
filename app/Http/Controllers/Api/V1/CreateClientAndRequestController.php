@@ -7,8 +7,10 @@ use App\Models\Client;
 use App\Models\ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ClientWelcomeMail;
 
-class createClientAndRequestController extends Controller
+class CreateClientAndRequestController extends Controller
 {
     /**
      * Store a newly created client and client request in storage.
@@ -18,33 +20,43 @@ class createClientAndRequestController extends Controller
      */
     public function store(Request $request)
     {
-        // Start a database transaction
         DB::beginTransaction();
 
         try {
-            // Create the client
             $clientData = $request->input('clientData');
+            $clientData['generatedCode'] = $clientData['generatedCode'];
+
             $client = Client::create($clientData);
 
-            // Attach the client ID to the request details
             $requestDetails = $request->input('requestDetails');
             $requestDetails['clients_id'] = $client->id;
 
-            // Create the client request
+            // Convert selectedSolutions to JSON
+            $selectedSolutions = json_encode($requestDetails['selectedSolutions']);
+            $requestDetails['selectedSolutions'] = $selectedSolutions;
+
+            // Ensure solutionType is treated as a string
+            $requestDetails['solutionType'] = strval($requestDetails['solutionType']);
+
+            // Insert into the database
             $clientRequest = ClientRequest::create($requestDetails);
 
             // Commit the transaction if everything is successful
             DB::commit();
 
-            // Return a success response
+            // Send the email to the client
+            $emailData = [
+                'firstName' => $clientData['firstName'],
+                'service' => $requestDetails['selectedSolutions'][0]['solution'],
+                'generatedCode' => $clientData['generatedCode']
+            ];
+
+            Mail::to($clientData['email'])->send(new ClientWelcomeMail($emailData));
+
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
-            // If any error occurs, rollback the transaction
             DB::rollback();
-
-            // Return an error response with the error message
             return response()->json(['error' => $e->getMessage()], 422);
         }
     }
 }
-

@@ -36,6 +36,21 @@ class ClientRequestController extends Controller
         return response()->json($client, 201);
     }
 
+    public function getClientRequests($clientId)
+    {
+        // Retrieve client requests based on the provided client ID
+        $clientRequests = ClientRequest::where('clients_id', $clientId)->get();
+
+        // Check if client requests were found
+        if ($clientRequests->isEmpty()) {
+            return response()->json(['message' => 'No requests found for the specified client ID'], 404);
+        }
+
+        // Return the client requests as JSON data
+        return response()->json(['requests' => $clientRequests], 200);
+    }
+
+
 
 
 
