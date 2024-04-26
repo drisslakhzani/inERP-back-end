@@ -4,13 +4,18 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Api\V1\ClientController;
 use App\Http\Controllers\Api\V1\ClientRequestController;
+use App\Http\Controllers\ClientRequestWebController;
 use App\Models\Client;
 use App\Models\ClientRequest as ModelsRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function (Request $request) {
-//     return view('admin.index');
-// });
+
+Route::get('/test/client', function (Request $request) {
+    return view('admin.client');
+});
+
+Route::get('/client', [ClientRequestWebController::class, 'getClientRequests'])->name('getClientRequests');
 
 //Route::get('/admin/dashboard/clients', function () {
 //
@@ -41,13 +46,3 @@ use Illuminate\Support\Facades\Route;
 //
 //// Route for storing a new client request
 //Route::post('/api/client_requests', [ClientRequestController::class, 'store']);
-
-
-
-
-
-
-
-
-
-

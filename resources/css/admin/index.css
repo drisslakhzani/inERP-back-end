@@ -21,7 +21,7 @@
 }
 
 nav div.active {
-    @apply bg-white rounded-tl-full rounded-bl-full text-sky-900 font-medium relative
+    @apply bg-white rounded-tl-full rounded-bl-full text-[#498D13] font-medium relative
 }
 
 nav div.active::before,
