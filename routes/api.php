@@ -17,5 +17,5 @@ Route::prefix('v1')->group(function () {
     });
     Route::post('/login', [AuthController::class, 'login']);
 
-    Route::post('/create-client-and-request', [CreateClientAndRequestController::class, 'store']);
+    Route::post('/create-client-and-request', [createClientAndRequestController::class, 'store']);
 });

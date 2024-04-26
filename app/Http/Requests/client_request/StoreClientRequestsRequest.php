@@ -27,9 +27,10 @@ class StoreClientRequestsRequest extends FormRequest
             'selectedSolutions.*.solution' => 'required|string',
             'selectedSolutions.*.solutionType' => 'required|string',
             'selectedSolutions.*.type' => 'required|string',
+            'selectedSolutions.*.status' => 'boolean',
             'selectedSolutions.*.additionalOption' => 'nullable|array', // Can be nullable
             'selectedSolutions.*.additionalOption.*' => 'string', // Each element in the array must be a string
-            'solutionType' => 'required|string',
+            'solutionType' => 'required|array',
             'solutionType.*' => 'string', // Each element in the array must be a string
             'client_id' => 'required|string',
             'status' => 'boolean',

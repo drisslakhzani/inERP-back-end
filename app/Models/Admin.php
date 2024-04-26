@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 
-class Admin extends Model 
+class Admin extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['login', 'password', 'email', 'phone', 'address', 'file_name'];
+    protected $fillable = ['login', 'password', 'email', 'phone', 'address', 'file_name' , ];
 
     public function getFileUrlAttribute()
     {
