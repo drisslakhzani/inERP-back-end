@@ -33,14 +33,7 @@ use Illuminate\Support\Facades\Route;
 //
 //Route::post('/admin/dashboard/clients/{clientId}/requests/{requestId}/toggle-status', [AdminController::class, 'toggleRequestStatus'])->name('requests.toggle-status');
 //
-//// for adding the files in the database
-//Route::get('/admin/download/{fileName}', [AdminController::class, 'downloadFileByName'])->name('admin.download.file');
-//
-//// Route for storing a new client
-//Route::post('/api/clients', [ClientController::class, 'store']);
-//
-//// Route for storing a new client request
-//Route::post('/api/client_requests', [ClientRequestController::class, 'store']);
+
 
 
 
