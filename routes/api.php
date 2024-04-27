@@ -13,9 +13,9 @@ Route::prefix('v1')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::put('/clients/{id}', [ClientController::class, 'update']);
         Route::get('/client_requests/{clientId}/requests', [ClientRequestController::class, 'getClientRequests']);
+        Route::put('/update-selected-solutions/{clientId}', [SelectedSolutionsController::class, 'updateSelectedSolutions']);
     });
     Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/update-selected-solutions', [SelectedSolutionsController::class, 'updateSelectedSolutions']);
 
     Route::post('/create-client-and-request', [createClientAndRequestController::class, 'store']);
 });

@@ -8,18 +8,20 @@ use Illuminate\Http\Request;
 
 class SelectedSolutionsController extends Controller
 {
-    public function updateSelectedSolutions(Request $request)
+    public function updateSelectedSolutions(Request $request, $clientId)
     {
-        // Validate incoming request data if needed
-
-        // Retrieve clientId and selectedSolutions from the request
-        $clientId = $request->input('clientId');
-        $selectedSolutions = $request->input('selectedSolutions');
-
-        // Update the existing selectedSolutions for the specified clientId
         $clientRequest = ClientRequest::where('clients_id', $clientId)->first();
         if ($clientRequest) {
-            $clientRequest->selectedSolutions = $selectedSolutions;
+            $selectedSolutions = $request->json()->all(); // Extract the array of selected solutions directly
+            $currentSelectedSolutions = $clientRequest->selectedSolutions ?? [];
+
+            // Check if $currentSelectedSolutions is an array or initialize as empty array
+            if (!is_array($currentSelectedSolutions)) {
+                $currentSelectedSolutions = [];
+            }
+
+            // Merge only if both $selectedSolutions and $currentSelectedSolutions are arrays
+            $clientRequest->selectedSolutions = array_merge($currentSelectedSolutions, $selectedSolutions);
             $clientRequest->save();
             return response()->json(['message' => 'Selected solutions updated successfully'], 200);
         } else {
