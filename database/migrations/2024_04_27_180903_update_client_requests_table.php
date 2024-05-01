@@ -8,15 +8,20 @@ class UpdateClientRequestsTable extends Migration
 {
     public function up()
     {
-        Schema::table('client_requests', function (Blueprint $table) {
-            $table->json('selectedSolutions')->after('solutionType');
-        });
+        // Check if the 'selectedSolutions' column does not exist before adding it
+        if (!Schema::hasColumn('client_requests', 'selectedSolutions')) {
+            Schema::table('client_requests', function (Blueprint $table) {
+                $table->json('selectedSolutions')->after('solutionType');
+            });
+        }
     }
 
     public function down()
     {
+        // Drop the 'selectedSolutions' column if it exists
         Schema::table('client_requests', function (Blueprint $table) {
             $table->dropColumn('selectedSolutions');
         });
     }
 }
+

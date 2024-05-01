@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Http\Controllers\Api\V1;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +19,9 @@ Route::prefix('v1')->group(function () {
         Route::put('/update-selected-solutions/{clientId}', [SelectedSolutionsController::class, 'updateSelectedSolutions']);
     });
     Route::post('/login', [AuthController::class, 'login']);
-
     Route::post('/create-client-and-request', [createClientAndRequestController::class, 'store']);
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/posts', [PostController::class, 'index']);
+    Route::get('/posts/{id}', [PostController::class, 'show']);
 });
+Route::get('/admin', [AdminController::class, 'show']);
