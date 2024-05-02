@@ -23,5 +23,6 @@ Route::prefix('v1')->group(function () {
     Route::post('/posts', [PostController::class, 'store']);
     Route::get('/posts', [PostController::class, 'index']);
     Route::get('/posts/{id}', [PostController::class, 'show']);
+    Route::get('/admin/data', [AdminController::class, 'getAdminData']);
 });
 Route::get('/admin', [AdminController::class, 'show']);

@@ -34,6 +34,7 @@ class LoginController extends Controller
         // If authentication fails, redirect back with an error message
         return redirect()->route('login')->with('error', 'Invalid credentials');
     }
+
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout(); // Logout the admin user using the configured guard

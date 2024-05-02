@@ -21,7 +21,8 @@ class StoreClientRequestsRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        // Define the validation rules
+        $rules = [
             // Each element in the array must be a string
             'selectedSolutions.*.number' => 'required|integer',
             'selectedSolutions.*.solution' => 'required|string',
@@ -35,6 +36,21 @@ class StoreClientRequestsRequest extends FormRequest
             'client_id' => 'required|string',
             'status' => 'boolean',
         ];
+
+        // Add custom logic to modify the solutionType if it's different from "sage"
+        $solutionType = $this->input('solutionType');
+        if (!empty($solutionType) && is_array($solutionType) && count($solutionType) > 0) {
+            foreach ($solutionType as $key => $value) {
+                // Check if the solutionType is different from "sage"
+                if ($value !== 'sage') {
+                    // Modify the solutionType to "infrastructure"
+                    $this->merge([
+                        "solutionType.$key" => "infrastructure"
+                    ]);
+                }
+            }
+        }
+
+        return $rules;
     }
 }
-

@@ -64,12 +64,6 @@ class ClientRequestWebController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
-
-
-
-
-
     public function deleteSolution($requestId, $solutionIndex)
     {
         try {

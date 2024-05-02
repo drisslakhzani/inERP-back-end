@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,10 +33,11 @@
                 var request = JSON.parse(row.dataset.request);
                 var solutions = request.selectedSolutions;
 
-                if (selectedType === '' || isSolutionTypeMatch(solutions, selectedType)) {
-                    row.style.display = '';
+                // Check if any of the solutions have the selectedType
+                if (solutions.some(solution => solution.solutionType.toLowerCase() === selectedType)) {
+                    row.style.display = ''; // Display the row if it matches the selectedType
                 } else {
-                    row.style.display = 'none';
+                    row.style.display = 'none'; // Hide the row if it doesn't match the selectedType
                 }
             });
         }
@@ -73,7 +75,7 @@
     @vite('resources/css/admin/index.css')
     @vite('../../js/admin/dashboard.js')
 
-    <title>Dashboard</title>
+    <title>Tableau de bord</title>
 </head>
 <body>
 <section class="w-full h-screen flex">
@@ -113,95 +115,179 @@
     </aside>
 
     <main class="w-[80%] ml-[20%] px-6 py-8" x-data="{ isOpen: false }">
-        <!-- Client Details -->
+        <!-- Détails du client -->
         <div class="bg-white shadow-md rounded p-6">
             <div class="flex justify-between items-center mb-6">
-                <h1 class="text-2xl font-bold">Client Details</h1>
-                <button @click="isOpen = !isOpen" class="text-blue-500 focus:outline-none">
-                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </button>
+                <h1 class="text-2xl font-bold">Détails du client</h1>
             </div>
 
-            <div x-show="isOpen" class="space-y-4">
-                <div class="bg-gray-100 p-4 rounded">
-                    <p class="font-semibold">Name:</p>
-                    <p>{{ $client->firstName }}</p>
+            <div  class="flex justify-evenly ">
+                <div class=" flex text-2xl p-4 rounded">
+                    <p class="font-semibold">Nom du client :</p>
+                    <p class=" px-3 font-bold">{{ $client->firstName }}</p>
+                </div>
+                <div class=" flex text-2xl p-4 rounded">
+                    <p class="font-semibold">Nom de l'entreprise :</p>
+                    <p class=" px-3 font-bold">{{ $client->companyName }}</p>
                 </div>
                 <div class="bg-white p-4 rounded">
-                    <p class="font-semibold">Email:</p>
-                    <p>{{ $client->email }}</p>
+                    <a href="mailto:{{ $client->email }}"
+                       target="_blank" class=" flex items-center  ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-[#e43b29] leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3 duration-200 hover:text-white hover:bg-[#e96253] duration-150 cursor-pointer"><i class="fa-solid fa-envelope-open-text px-3 scale-150"></i>Email</a>
                 </div>
-                <div class="bg-gray-100 p-4 rounded">
-                    <p class="font-semibold">Phone Number:</p>
-                    <a :href="'https://wa.me/{{ $client->phoneNumber }}'" target="_blank" class="text-blue-500 hover:underline">{{ $client->phoneNumber }}</a>
+                <div class=" p-4 rounded">
+                    <a :href="'https://wa.me/{{ $client->phoneNumber }}'" target="_blank" class=" flex items-center  ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-[#498D13] leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3 duration-200 hover:text-white hover:bg-black duration-150 cursor-pointer"><i class="fa-brands  fa-whatsapp px-3 scale-150"></i>Whatsapp</a>
                 </div>
             </div>
         </div>
 
-        <!-- Client Requests -->
+        <!-- Demandes du client -->
         <div class="mt-10">
-            <!-- Solution Type Filter -->
-            <select class="" id="solutionTypeFilter" x-model="selectedSolutionType" @change="filterSolutions()">
-                <option value="">All</option>
-                <option value="sage">Sage</option>
-                <option value="infrastructure">Infrastructure</option>
-                <option value="material">Material</option>
-                <option value="microsoft">Microsoft</option>
-            </select>
-            <!-- Client Requests -->
+            <!-- Demandes du client -->
             <div class="mt-10">
-                <h1 class="text-xl text-[#498D13] font-bold capitalize pb-6">Selected Solutions</h1>
-                <!-- Display Selected Solutions -->
-                <!-- Display Selected Solutions -->
+                <h1 class="text-xl text-[#498D13] font-bold capitalize pb-6">Solutions sélectionnées</h1>
+                <!-- Afficher les solutions sélectionnées -->
                 <div class="flex flex-col">
+
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                         <tr>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Solution</th>
-                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Solution Type</th>
-                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Number</th>
-                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Additional Options</th>
-                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type de solution</th>
+                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Numéro</th>
+                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Options supplémentaires</th>
+                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Statut</th>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($requests as $request)
                             @foreach ($request->selectedSolutions as $index => $selectedSolution)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-no-wrap">{{ $selectedSolution['solution'] }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap">{{ $selectedSolution['solutionType'] }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap">{{ $selectedSolution['number'] }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap">
-                                        <ul class="disc">
-                                            @foreach ($selectedSolution['additionalOption'] ?? [] as $option)
-                                                <li>{{ $option }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap">{{ $selectedSolution['status'] ? 'OK' : 'Pending' }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap">
-                                        <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2 rounded mt-2">
-                                            Toggle Status
-                                        </button>
-                                        <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2 rounded mt-2 ml-2">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
+                                @if ($selectedSolution['solutionCategory'] === 'sage')
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-no-wrap">{{ $selectedSolution['solution'] }}</td>
+                                        <td class="px-6 py-4 whitespace-no-wrap">{{ $selectedSolution['solutionType'] }}</td>
+                                        <td class="px-6 py-4 whitespace-no-wrap">{{ $selectedSolution['number'] }}</td>
+                                        <td class="px-6 py-4 whitespace-no-wrap">
+                                            <ul class="disc">
+                                                @foreach ($selectedSolution['additionalOption'] ?? [] as $option)
+                                                    <li>{{ $option }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap">{{ $selectedSolution['status'] ? 'OK' : 'En attente' }}</td>
+                                        <td class="px-6 py-4 whitespace-no-wrap">
+                                            <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2 rounded mt-2">
+                                                Changer de statut
+                                            </button>
+                                            <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2 rounded mt-2 ml-2">
+                                                Supprimer
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         @endforeach
                         </tbody>
                     </table>
+
+                    <!-- Microsoft Solutions -->
+                    <div class="mt-10" x-data="{ isOpen: false }">
+                        @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'microsoft')
+                            <h1 @click="isOpen = !isOpen" class="text-xl text-[#498D13] font-bold capitalize pb-6 cursor-pointer">
+                                Microsoft Solutions <svg :class="{ 'rotate-180': isOpen }" class="h-5 w-5 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </h1>
+                            <!-- Display Microsoft Solutions -->
+                            <div x-show="isOpen" class="flex flex-col">
+                                @foreach ($requests as $request)
+                                    @foreach ($request->selectedSolutions as $index => $selectedSolution)
+                                        @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'microsoft')
+                                            <div class="flex flex-col">
+                                                <p class="text-black font-bold">besion du client:{{ $selectedSolution['solution'] }}</p>
+                                                <span class="flex ">
+                                                    <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2 rounded mt-2 w-fit ">
+                                                    Toggle Status
+                                                    </button>
+                                                    <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2 rounded mt-2 ml-2 w-fit ">
+                                                    Supprimer
+                                                    </button>
+
+                                                </span>
+
+                                            </div>
+
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Infrastructure Solutions -->
+                    <div class="mt-10" x-data="{ isOpen: false }">
+                        @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'infrastructure')
+                            <h1 @click="isOpen = !isOpen" class="text-xl text-[#498D13] font-bold capitalize pb-6 cursor-pointer">
+                                Infrastructure Solutions <svg :class="{ 'rotate-180': isOpen }" class="h-5 w-5 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </h1>
+                            <!-- Display Infrastructure Solutions -->
+                            <div x-show="isOpen" class="flex flex-col">
+                                @foreach ($requests as $request)
+                                    @foreach ($request->selectedSolutions as $index => $selectedSolution)
+                                        @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'infrastructure')
+                                            <div class="flex flex-col">
+                                                <p class="text-black font-bold">besion du client:{{ $selectedSolution['solution'] }}</p>
+                                                <span class="flex ">
+                                                    <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2 rounded mt-2 w-fit ">
+                                                    Toggle Status
+                                                    </button>
+                                                    <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2 rounded mt-2 ml-2 w-fit ">
+                                                    Supprimer
+                                                    </button>
+
+                                                </span>
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Material Solutions -->
+                    <div class="mt-10" x-data="{ isOpen: false }">
+                        @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'material')
+                            <h1 @click="isOpen = !isOpen" class="text-xl text-[#498D13] font-bold capitalize pb-6 cursor-pointer">
+                                Material Solutions <svg :class="{ 'rotate-180': isOpen }" class="h-5 w-5 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </h1>
+                            <!-- Display Material Solutions -->
+                            <div x-show="isOpen" class="flex flex-col">
+                                @foreach ($requests as $request)
+                                    @foreach ($request->selectedSolutions as $index => $selectedSolution)
+                                        @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'material')
+                                            <div class="flex flex-col">
+                                                <p class="text-black font-bold">besion du client:{{ $selectedSolution['solution'] }}</p>
+                                                <span class="flex ">
+                                                    <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2 rounded mt-2 w-fit ">
+                                                    Toggle Status
+                                                    </button>
+                                                    <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2 rounded mt-2 ml-2 w-fit ">
+                                                    Supprimer
+                                                    </button>
+
+                                                </span>
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
                 </div>
-
-
             </div>
         </div>
     </main>
-
 </section>
 </body>
 </html>

@@ -39,13 +39,27 @@ class AdminController extends Controller
             'adminName' => 'required|string',
             'login' => 'required|string|unique:admins,login,' . $admin->id,
             'phoneNumber' => 'required|string',
+            'whatsappNumber' => 'required|string',
+            'email' => 'required|email',
+            'facebook' => 'nullable|string',
+            'instagram' => 'nullable|string',
+            'linkedIn' => 'nullable|string',
+            'twitter' => 'nullable|string',
+            'locationAddress' => 'required|string',
             // Add validation rules for other fields as needed
         ]);
 
-        // Update the adminName, login, and phoneNumber fields
+        // Update all fields
         $admin->adminName = $request->adminName;
         $admin->login = $request->login;
         $admin->phoneNumber = $request->phoneNumber;
+        $admin->whatsappNumber = $request->whatsappNumber;
+        $admin->email = $request->email;
+        $admin->facebook = $request->facebook;
+        $admin->instagram = $request->instagram;
+        $admin->linkedIn = $request->linkedIn;
+        $admin->twitter = $request->twitter;
+        $admin->locationAddress = $request->locationAddress;
 
         // Check if a new password is provided and not empty
         if ($request->filled('password')) {
@@ -59,6 +73,29 @@ class AdminController extends Controller
         $admin->save();
 
         return redirect()->route('admin.edit')->with('success', 'Admin data updated successfully');
+    }
+
+    public function getAdminData()
+    {
+        // Find the admin record
+        $admin = Admin::first();
+
+        // Exclude login and password fields from the response
+        $adminData = [
+            'adminName' => $admin->adminName,
+            'phoneNumber' => $admin->phoneNumber,
+            'whatsappNumber' => $admin->whatsappNumber,
+            'email' => $admin->email,
+            'facebook' => $admin->facebook,
+            'instagram' => $admin->instagram,
+            'linkedIn' => $admin->linkedIn,
+            'twitter' => $admin->twitter,
+            'locationAddress' => $admin->locationAddress,
+            'created_at' => $admin->created_at,
+            'updated_at' => $admin->updated_at,
+        ];
+
+        return response()->json($adminData);
     }
 
 

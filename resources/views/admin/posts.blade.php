@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -18,7 +18,7 @@
     @vite('resources/css/admin/index.css')
     @vite('../../js/admin/dashboard.js')
 
-    <title>Dashboard</title>
+    <title>Tableau de bord</title>
 </head>
 
 <body>
@@ -43,7 +43,7 @@
                     Info d'administration
                 </a>
             </div>
-            <div class="h-12 flex justify-evenly items-center active ">
+            <div class="h-12 flex justify-evenly items-center active  ">
                 <i class="fa-solid fa-file-circle-plus"></i>
                 <a href="/posts/create" class="hover:underline w-6/12">
                     Ajouter un blog
@@ -52,35 +52,35 @@
         </nav>
         <form class="h-12 flex justify-evenly items-center  " action="{{ route('logout') }}" method="POST">
             @csrf
-            <button type="submit" class=" flex  ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-black leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3 duration-200 hover:text-black hover:bg-white duration-150 cursor-pointer">
+            <button type="submit" class="flex ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-black leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3 duration-200 hover:text-black hover:bg-white duration-150 cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i>
-                <p class="hover:underline px-2 " >Déconnexion</p>
+                <p class="hover:underline px-2">Déconnexion</p>
             </button>
         </form>
     </aside>
 
     <main class="w-[72%] ml-[24%] flex flex-col pr-8 pl-2 pt-8">
-        <h1 class="text-2xl font-bold mb-4">Add New Post</h1>
-        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+        <h1 class="text-2xl font-bold mb-4">Ajouter un nouvel article</h1>
+        <form action="{{ route('posts.store') }}" class="flex flex-col " method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
-                <label for="title" class="block text-gray-700 font-bold mb-2">Title:</label>
+                <label for="title" class="block text-gray-700 font-bold mb-2">Titre :</label>
                 <input type="text" id="title" name="title" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
             <div class="mb-4">
-                <label for="description" class="block text-gray-700 font-bold mb-2">Description:</label>
+                <label for="description" class="block text-gray-700 font-bold mb-2">Description :</label>
                 <textarea id="description" name="description" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
             </div>
             <div class="mb-4">
-                <label for="long_text" class="block text-gray-700 font-bold mb-2">Long Text:</label>
+                <label for="long_text" class="block text-gray-700 font-bold mb-2">Texte long :</label>
                 <textarea id="long_text" name="long_text" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
-            </div> <div class="mb-4">
-                <label for="image" class="block text-gray-700 font-bold mb-2">Image:</label>
-                <input type="file" id="image" name="image" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"> </div>
-            <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
-
+            </div>
+            <div class="mb-4">
+                <label for="image" class="block text-gray-700 font-bold mb-2">Image :</label>
+                <input type="file" id="image" name="image" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <button type="submit" class="ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-black leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3 duration-200 hover:text-white hover:bg-[#498D13] duration-150 cursor-pointer">Soumettre</button>
         </form>
-
     </main>
 </section>
 

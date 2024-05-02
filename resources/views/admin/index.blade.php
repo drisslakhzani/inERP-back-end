@@ -66,7 +66,7 @@
             </h1>
             @if (count($clientRequests) > 0)
                 <div class="flex flex-col">
-                    <table id="data-table" class="border border-gray-300 shadow-md w-[97%] mx-auto">
+                    <table id="data-table" class="border border-gray-300 shadow-md w-full mx-auto">
                         <thead>
                         <tr class="bg-gray-200 uppercase">
                             <th class="py-2 border border-gray-400">
@@ -127,7 +127,7 @@
             </h1>
             @if (count($clientRequests) > 0)
                 <div class="flex flex-col">
-                    <table id="data-table" class="border border-gray-300 shadow-md w-[97%] mx-auto">
+                    <table id="data-table" class="border border-gray-300 shadow-md w-full mx-auto">
                         <thead>
                         <tr class="bg-gray-200 uppercase">
                             <th class="py-2 border border-gray-400">

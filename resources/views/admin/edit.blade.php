@@ -77,14 +77,14 @@
 
             <img class="w-[70%] self-center pb-5" height="400" src="{{ asset('assets/inerp_logo.png') }}"
                  alt="inerp_logo">
-            <div class="h-12 flex justify-evenly items-center active ">
+            <div class="h-12 flex justify-evenly items-center ">
                 <i class="fa-solid fa-house"></i>
                 <a href="/client" class="hover:underline w-6/12">
                     Tableau de bord
                 </a>
             </div>
 
-            <div class="h-12 flex justify-evenly items-center  ">
+            <div class="h-12 flex justify-evenly items-center  active ">
                 <i class="fa-solid fa-wrench"></i>
                 <a href="/admin/edit" class="hover:underline w-6/12">
                     Info d'administration
@@ -217,8 +217,8 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Mettre à jour</button>
-                    <button type="button" onclick="cancelEdit()" class="ml-2 text-gray-500 hover:text-gray-700 focus:outline-none">Annuler</button>
+                    <button type="submit" class=" flex  ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-[#498D13]  leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3 duration-200 hover:text-white hover:bg-black duration-150 cursor-pointer">Mettre à jour</button>
+                    <button type="button" onclick="cancelEdit()" class=" flex  ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-black leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3 duration-200 hover:text-white hover:bg-[#498D13] duration-150 cursor-pointer">Annuler</button>
                 </div>
             </form>
         </div>
