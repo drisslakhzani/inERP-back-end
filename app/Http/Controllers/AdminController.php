@@ -46,7 +46,6 @@ class AdminController extends Controller
             'linkedIn' => 'nullable|string',
             'twitter' => 'nullable|string',
             'locationAddress' => 'required|string',
-            // Add validation rules for other fields as needed
         ]);
 
         // Update all fields
