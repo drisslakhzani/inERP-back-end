@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to INERP Service</title>
+    <title>Bienvenue chez INERP Service</title>
 </head>
+<style>
+    .img-inerp{
+        width: 20%;
+    }
+</style>
 <body>
-<p>Dear {{ $emailData['firstName'] }},</p>
+<img class="img-inerp" src="{{ asset('/assets/inerp_logo_origin.png') }}" alt="INERP Logo">
+<p>Cher {{ $emailData['firstName'] }},</p>
 
-<p>Welcome to INERP Service! We are excited to have you on board.</p>
+<p>Bienvenue chez INERP Service ! Nous sommes ravis de vous accueillir.</p>
 
-<p>You have chosen the following service: {{ $emailData['service'] }}.</p>
 
-<p>Your generated access code is: {{ $emailData['generatedCode'] }}.</p>
 
-<p>You can use this code to access your client space.</p>
+<p>Votre code d'accès généré est : <u>{{ $emailData['generatedCode'] }}</u>.</p>
 
-<p>Thank you for choosing INERP Service.</p>
+<p>Vous pouvez utiliser ce code pour accéder à votre espace client avec votre nom.</p>
 
-<p>Best regards,</p>
-<p>The INERP Team</p>
+<p>Merci d'avoir choisi INERP Service.</p>
+
+<p>Cordialement,</p>
+<p>L'équipe INERP</p>
 </body>
 </html>

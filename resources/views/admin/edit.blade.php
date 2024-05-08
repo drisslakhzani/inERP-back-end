@@ -188,7 +188,7 @@
 
                 <div class="space-y-2">
                     <label for="email" class="block font-bold">Email</label>
-                    <input type="email" id="email" name="email"value="{{ $admin->email }}" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200">
+                    <input type="email" id="email" name="email" value="{{ $admin->email }}" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200">
                 </div>
 
                 <div class="space-y-2">
@@ -217,8 +217,8 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class=" flex  ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-[#498D13]  leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3 duration-200 hover:text-white hover:bg-black duration-150 cursor-pointer">Mettre à jour</button>
-                    <button type="button" onclick="cancelEdit()" class=" flex  ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-black leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3 duration-200 hover:text-white hover:bg-[#498D13] duration-150 cursor-pointer">Annuler</button>
+                    <button type="submit" class=" flex  ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-[#498D13]  leading-4 text-white w-fit self-center uppercase font-[600] rounded-full  mr-3  hover:text-white hover:bg-black duration-150 cursor-pointer">Mettre à jour</button>
+                    <button type="button" onclick="cancelEdit()" class=" flex  pt-3 pb-3 px-5 text-[14px] bg-black leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3  hover:text-white hover:bg-[#498D13] duration-150 cursor-pointer">Annuler</button>
                 </div>
             </form>
         </div>

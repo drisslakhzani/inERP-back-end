@@ -25,15 +25,32 @@
         td.additionalOptions {
             text-align: left; /* Aligner le texte sur la gauche */
         }
+        .headline{
+            text-decoration: #498D13;
+        }
+        .part2{
+            text-align: left;
+        }
+        .flex{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
     </style>
+
 </head>
 <body>
-
+<div style="display: flex; justify-content: space-between;">
+    <h1 style="text-decoration: #498D13;">INERP</h1>
+    <p style="text-align: left;">{{ $client->created_at }}</p>
+</div>
+<hr>
 <h1>Détails du client :</h1>
 <p>Nom du client : {{ $client->firstName }}</p>
 <p>Nom de l'entreprise : {{ $client->companyName }}</p>
 
 <h1>Demandes du client :</h1>
+
 <table>
     <thead>
     <tr>
@@ -46,21 +63,89 @@
     <tbody>
     @foreach ($requests as $request)
         @foreach ($request->selectedSolutions as $index => $selectedSolution)
-            <tr>
-                <td class="thisone">{{ $selectedSolution['solution'] }}</td>
-                <td class="thisone">{{ $selectedSolution['solutionType'] }}</td>
-                <td class="thisone">{{ $selectedSolution['number'] }}</td>
-                <td class="thisone additionalOptions">
-                    <ul>
-                        @foreach ($selectedSolution['additionalOption'] ?? [] as $option)
-                            <li>{{ $option }}</li>
-                        @endforeach
-                    </ul>
-                </td>
-            </tr>
+            @if($selectedSolution['solutionCategory'] === 'sage')
+                <tr>
+                    <td class="thisone">{{ $selectedSolution['solution'] }}</td>
+                    <td class="thisone">{{ $selectedSolution['solutionType'] }}</td>
+                    <td class="thisone">{{ $selectedSolution['number'] }}</td>
+                    <td class="thisone additionalOptions">
+                        <ul>
+                            @foreach ($selectedSolution['additionalOption'] ?? [] as $option)
+                                <li>{{ $option }}</li>
+                            @endforeach
+                        </ul>
+                    </td>
+                </tr>
+            @else
+                <p>vide</p>
+            @endif
+
         @endforeach
     @endforeach
     </tbody>
 </table>
+
+<div  >
+    @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'microsoft')
+
+        <h1>
+            Microsoft Solutions
+        </h1>
+        <div >
+            @foreach ($requests as $request)
+                @foreach ($request->selectedSolutions as $index => $selectedSolution)
+                    @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'microsoft')
+                        <div >
+                            <p>besion du client:{{ $selectedSolution['solution'] }}</p>
+                        </div>
+
+                    @endif
+                @endforeach
+            @endforeach
+        </div>
+    @endif
+</div>
+
+<div  >
+    @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'infrastructure')
+
+        <h1>
+            Infrastructure Solutions
+        </h1>
+        <div >
+            @foreach ($requests as $request)
+                @foreach ($request->selectedSolutions as $index => $selectedSolution)
+                    @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'infrastructure')
+                        <div >
+                            <p>besion du client:{{ $selectedSolution['solution'] }}</p>
+                        </div>
+
+                    @endif
+                @endforeach
+            @endforeach
+        </div>
+    @endif
+</div>
+
+<div  >
+    @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'material')
+
+        <h1>
+            Material Solutions
+        </h1>
+        <div >
+            @foreach ($requests as $request)
+                @foreach ($request->selectedSolutions as $index => $selectedSolution)
+                    @if (!empty($selectedSolution['solution']) && $selectedSolution['solutionCategory'] === 'material')
+                        <div >
+                            <p>besion du client:{{ $selectedSolution['solution'] }}</p>
+                        </div>
+
+                    @endif
+                @endforeach
+            @endforeach
+        </div>
+    @endif
+</div>
 </body>
 </html>

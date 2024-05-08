@@ -10,8 +10,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/index.css') }}">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="{{ asset('js/admin/dashboard.js') }}"></script>
     <script>
         function toggleStatus(requestId, solutionIndex) {
             axios.put(`/client-request/${requestId}/toggle-status`, { solutionIndex: solutionIndex })
@@ -71,9 +75,8 @@
 
     {{-- Styles --}}
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    @vite('resources/css/app.css')
-    @vite('resources/css/admin/index.css')
-    @vite('../../js/admin/dashboard.js')
+
+
 
     <title>Tableau de bord</title>
 </head>
@@ -154,7 +157,7 @@
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Solution</th>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type de solution</th>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Numéro</th>
-                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Options supplémentaires</th>
+                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase w-[30%] tracking-wider">Options supplémentaires</th>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Statut</th>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         </tr>
@@ -170,16 +173,16 @@
                                         <td class="px-6 py-4 whitespace-no-wrap">
                                             <ul class="disc">
                                                 @foreach ($selectedSolution['additionalOption'] ?? [] as $option)
-                                                    <li>{{ $option }}</li>
+                                                    <li class="py-2">+{{ $option }}</li>
                                                 @endforeach
                                             </ul>
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap">{{ $selectedSolution['status'] ? 'OK' : 'En attente' }}</td>
                                         <td class="px-6 py-4 whitespace-no-wrap">
-                                            <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2 rounded mt-2">
+                                            <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2 rounded-full mt-2">
                                                 Changer de statut
                                             </button>
-                                            <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2 rounded mt-2 ml-2">
+                                            <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2 rounded-full mt-2 ml-2">
                                                 Supprimer
                                             </button>
                                         </td>
@@ -204,10 +207,10 @@
                                             <div class="flex flex-col">
                                                 <p class="text-black font-bold">besion du client:{{ $selectedSolution['solution'] }}</p>
                                                 <span class="flex ">
-                                                    <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2 rounded mt-2 w-fit ">
+                                                    <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2  mt-2 w-fit rounded-full ">
                                                     Toggle Status
                                                     </button>
-                                                    <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2 rounded mt-2 ml-2 w-fit ">
+                                                    <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2  mt-2 ml-2 w-fit rounded-full ">
                                                     Supprimer
                                                     </button>
 
@@ -236,10 +239,10 @@
                                             <div class="flex flex-col">
                                                 <p class="text-black font-bold">besion du client:{{ $selectedSolution['solution'] }}</p>
                                                 <span class="flex ">
-                                                    <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2 rounded mt-2 w-fit ">
+                                                    <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2  mt-2 w-fit rounded-full">
                                                     Toggle Status
                                                     </button>
-                                                    <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2 rounded mt-2 ml-2 w-fit ">
+                                                    <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2  mt-2 ml-2 w-fit rounded-full">
                                                     Supprimer
                                                     </button>
 
@@ -267,10 +270,10 @@
                                             <div class="flex flex-col">
                                                 <p class="text-black font-bold">besion du client:{{ $selectedSolution['solution'] }}</p>
                                                 <span class="flex ">
-                                                    <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2 rounded mt-2 w-fit ">
+                                                    <button @click="toggleStatus({{ $request->id }}, {{ $index }})" class="bg-[#498D13] text-white px-4 py-2  mt-2 w-fit rounded-full">
                                                     Toggle Status
                                                     </button>
-                                                    <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2 rounded mt-2 ml-2 w-fit ">
+                                                    <button @click="deleteSolution({{ $request->id }}, {{ $index }})" class="bg-red-500 text-white px-4 py-2  mt-2 ml-2 w-fit rounded-full">
                                                     Supprimer
                                                     </button>
 

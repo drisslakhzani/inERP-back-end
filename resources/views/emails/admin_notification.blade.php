@@ -3,15 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Notification</title>
+    <title>Notification à l'administrateur</title>
 </head>
 <body>
-<h2>Hello Admin,</h2>
-<p>A new request has been submitted. Below are the details:</p>
-<p><strong>Client Name:</strong> {{ $client->firstName }}</p>
-<p><strong>Company Name:</strong> {{ $client->companyName }}</p>
-<p><strong>Email:</strong> {{ $client->email }}</p>
-<p><strong>Phone Number:</strong> {{ $client->phoneNumber }}</p>
-<p>PDF Download Link: <a href="{{ url($pdfPath) }}">Download PDF</a></p>
+<h2>Bonjour Administrateur,</h2>
+<p>Une nouvelle demande a été soumise. Voici les détails :</p>
+<p><strong>Nom du client :</strong> {{ $client->firstName }}</p>
+<p><strong>Nom de l'entreprise :</strong> {{ $client->companyName }}</p>
+<p><strong>Email :</strong> {{ $client->email }}</p>
+<p><strong>Numéro de téléphone :</strong> {{ $client->phoneNumber }}</p>
+<p>Lien de téléchargement du PDF : <a href="{{ url($pdfPath) }}">Télécharger le PDF</a></p>
 </body>
 </html>

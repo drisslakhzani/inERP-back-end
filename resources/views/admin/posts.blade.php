@@ -61,26 +61,27 @@
 
     <main class="w-[72%] ml-[24%] flex flex-col pr-8 pl-2 pt-8">
         <h1 class="text-2xl font-bold mb-4">Ajouter un nouvel article</h1>
-        <form action="{{ route('posts.store') }}" class="flex flex-col " method="POST" enctype="multipart/form-data">
+        <form action="{{ route('posts.store') }}" class="w-[80%] mx-auto p-8 bg-white rounded-lg shadow-md" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
-                <label for="title" class="block text-gray-700 font-bold mb-2">Titre :</label>
-                <input type="text" id="title" name="title" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <label for="title" class="block text-sm font-semibold text-gray-700 mb-2">Titre :</label>
+                <input type="text" id="title" name="title" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm">
             </div>
             <div class="mb-4">
-                <label for="description" class="block text-gray-700 font-bold mb-2">Description :</label>
-                <textarea id="description" name="description" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">Description :</label>
+                <textarea id="description" name="description" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm" rows="3"></textarea>
             </div>
             <div class="mb-4">
-                <label for="long_text" class="block text-gray-700 font-bold mb-2">Texte long :</label>
-                <textarea id="long_text" name="long_text" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                <label for="long_text" class="block text-sm font-semibold text-gray-700 mb-2">Texte long :</label>
+                <textarea id="long_text" name="long_text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm" rows="5"></textarea>
             </div>
             <div class="mb-4">
-                <label for="image" class="block text-gray-700 font-bold mb-2">Image :</label>
-                <input type="file" id="image" name="image" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <label for="image" class="block text-sm font-semibold text-gray-700 mb-2">Image :</label>
+                <input type="file" id="image" name="image" class="w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm">
             </div>
-            <button type="submit" class="ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-black leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3 duration-200 hover:text-white hover:bg-[#498D13] duration-150 cursor-pointer">Soumettre</button>
+            <button type="submit" class="w-full py-3 text-sm bg-gray-800 text-white font-semibold rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 duration-200">Soumettre</button>
         </form>
+
     </main>
 </section>
 

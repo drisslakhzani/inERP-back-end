@@ -8,9 +8,24 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+
+    public function getPosts()
+    {
+        $posts = Post::all();
+        return view('admin.posts', compact('posts'));
+    }
     public function create()
     {
         return view('admin.posts');
+    }
+    public function show($id)
+    {
+        $post = Post::find($id);
+        if (!$post) {
+            return response()->json(['message' => 'Post not found'], 404);
+        }
+
+        return response()->json($post);
     }
 
     public function store(Request $request)
@@ -25,12 +40,18 @@ class PostController extends Controller
         // Store the image in the public directory
         $imagePath = $request->file('image')->store('images', 'public');
 
+
         $post = new Post([
             'title' => $request->get('title'),
             'description' => $request->get('description'),
             'long_text' => $request->get('long_text'),
-            'image_path' => $imagePath,
         ]);
+       // if($request->hasFile('image')){
+         //   $image = $request->file('image');
+           // $filename = uniqid() . '.' . $image->getClientOriginalName();
+           // $image->move(public_path('images'), $filename);
+          //  $post->image_path = $filename;
+       // }
 
         $post->save();
 

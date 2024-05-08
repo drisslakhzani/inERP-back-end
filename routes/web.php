@@ -20,7 +20,11 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
     Route::get('/admin/edit', [AdminController::class, 'edit'])->name('admin.edit');
     Route::put('/admin/update', [AdminController::class, 'update'])->name('admin.update');
+    Route::get('/posts', [PostController::class, 'getPosts'])->name('admin.posts');
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 });
+
 Route::get('pdfs/{filename}', function ($filename) {
     $file = Storage::get('pdfs/' . $filename);
     return response($file, 200)->header('Content-Type', 'application/pdf');

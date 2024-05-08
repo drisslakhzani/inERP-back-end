@@ -32,7 +32,7 @@ class AdminController extends Controller
     public function update(Request $request)
     {
         // Find the admin record
-        $admin = Admin::first();
+        $admin = Admin::findOrFail(1); // Assuming there's only one admin
 
         // Validate the request data
         $request->validate([
@@ -75,6 +75,10 @@ class AdminController extends Controller
         return redirect()->route('admin.edit')->with('success', 'Admin data updated successfully');
     }
 
+
+
+
+
     public function getAdminData()
     {
         // Find the admin record
@@ -97,36 +101,4 @@ class AdminController extends Controller
 
         return response()->json($adminData);
     }
-
-
-    public function register(Request $request)
-    {
-        // Validate the request data
-        $request->validate([
-            'adminName' => 'required|string',
-            'login' => 'required|string|unique:admins',
-            'password' => 'required|string|min:6',
-            'phoneNumber' => 'required|string',
-            // Add validation rules for other fields as needed
-        ]);
-
-        // Hash the password
-        $hashedPassword = Hash::make($request->password);
-
-        // Create a new admin record with the hashed password
-        $admin = new Admin([
-            'adminName' => $request->adminName,
-            'login' => $request->login,
-            'password' => $hashedPassword,
-            'phoneNumber' => $request->phoneNumber,
-            // Add other fields here
-        ]);
-
-        // Save the admin record
-        $admin->save();
-
-        // Redirect or return response as needed
-    }
-
-
 }

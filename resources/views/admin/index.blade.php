@@ -164,10 +164,6 @@
                                             <span>
                                                 {{ $clientRequest->status == 1 ? 'Terminé' : 'En attente' }}
                                             </span>
-                                            <span class="relative flex h-2 w-2">
-                                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#498D13] opacity-75"></span>
-                                                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#498D13]"></span>
-                                            </span>
                                         </td>
                                     </tr>
                                 @endif
