@@ -64,7 +64,7 @@ class AdminController extends Controller
         if ($request->filled('password')) {
             // Hash the new password
             $hashedPassword = Hash::make($request->password);
-            // Update the password field with the hashed password
+            // Update the password field with hash password
             $admin->password = $hashedPassword;
         }
 
