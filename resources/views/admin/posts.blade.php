@@ -28,28 +28,24 @@
 
         <nav class="ml-3 flex flex-col gap-2 justify-center  text-sm lg:text-base">
 
-            <img class="w-[70%] self-center pb-5" height="400" src="{{ asset('assets/inerp_logo.png') }}"
-                 alt="inerp_logo">
+            <img class="w-[70%] self-center pb-5" height="400" src="{{ asset('assets/inerp_logo.png') }}" alt="inerp_logo">
+
             <div class="h-12 flex justify-evenly items-center ">
                 <i class="fa-solid fa-house"></i>
-                <a href="/client" class="hover:underline w-6/12">
-                    Tableau de bord
-                </a>
+                <a href="/client" class="hover:underline w-6/12">Tableau de bord</a>
             </div>
 
             <div class="h-12 flex justify-evenly items-center  ">
                 <i class="fa-solid fa-wrench"></i>
-                <a href="/admin/edit" class="hover:underline w-6/12">
-                    Info d'administration
-                </a>
+                <a href="/admin/edit" class="hover:underline w-6/12">Info d'administration</a>
             </div>
+
             <div class="h-12 flex justify-evenly items-center active  ">
                 <i class="fa-solid fa-file-circle-plus"></i>
-                <a href="/posts/create" class="hover:underline w-6/12">
-                    Ajouter un blog
-                </a>
+                <a href="/posts/create" class="hover:underline w-6/12">Ajouter un blog</a>
             </div>
         </nav>
+
         <form class="h-12 flex justify-evenly items-center  " action="{{ route('logout') }}" method="POST">
             @csrf
             <button type="submit" class="flex ml-[2%] pt-3 pb-3 px-5 text-[14px] bg-black leading-4 text-white w-fit self-center uppercase font-[600] rounded-full -ml-10 mr-3 duration-200 hover:text-black hover:bg-white duration-150 cursor-pointer">
@@ -81,6 +77,7 @@
             </div>
             <button type="submit" class="w-full py-3 text-sm bg-gray-800 text-white font-semibold rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 duration-200">Soumettre</button>
         </form>
+
 
     </main>
 </section>

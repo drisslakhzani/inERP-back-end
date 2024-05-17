@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
 
-class LoginController extends Controller
+class  LoginController extends Controller
 {
     public function showLoginForm()
     {
@@ -34,6 +34,7 @@ class LoginController extends Controller
         // If authentication fails, redirect back with an error message
         return redirect()->route('login')->with('error', 'Invalid credentials');
     }
+
 
     public function logout(Request $request)
     {

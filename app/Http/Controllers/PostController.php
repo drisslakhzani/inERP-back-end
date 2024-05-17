@@ -12,12 +12,13 @@ class PostController extends Controller
     public function getPosts()
     {
         $posts = Post::all();
-        return view('admin.posts', compact('posts'));
+        return view('admin.postsDelete', compact('posts'));
     }
     public function create()
     {
         return view('admin.posts');
     }
+
     public function show($id)
     {
         $post = Post::find($id);
@@ -45,6 +46,7 @@ class PostController extends Controller
             'title' => $request->get('title'),
             'description' => $request->get('description'),
             'long_text' => $request->get('long_text'),
+            'image_path' => $imagePath,
         ]);
        // if($request->hasFile('image')){
          //   $image = $request->file('image');
@@ -54,7 +56,6 @@ class PostController extends Controller
        // }
 
         $post->save();
-
         return redirect()->route('posts.create')->with('success', 'Post created successfully');
     }
 
@@ -62,5 +63,14 @@ class PostController extends Controller
     {
         $posts = Post::all();
         return response()->json($posts);
+    }
+
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        Storage::disk('public')->delete($post->image_path);
+        $post->delete();
+
+        return redirect()->route('admin.posts.index')->with('success', 'Post deleted successfully');
     }
 }

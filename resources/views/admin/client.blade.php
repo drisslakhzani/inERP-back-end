@@ -70,7 +70,30 @@
         // Define selectedSolutionType variable for binding
         var selectedSolutionType = '';
     </script>
+    <style>
+        nav div.active::before,
+        nav div.active::after {
+        border-radius: 1rem;
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: 0rem;
+        background: #498D13;
+        }
 
+        nav div.active::before {
+        border-radius: 0 0 1rem;
+        bottom: 3rem;
+        box-shadow: 5px 5px 0 5px white;
+        }
+
+        nav div.active::after {
+        border-radius: 0 1rem 0 0;
+        top: 3rem;
+        box-shadow: 5px -5px 0 5px white;
+        }
+    </style>
 
 
     {{-- Styles --}}

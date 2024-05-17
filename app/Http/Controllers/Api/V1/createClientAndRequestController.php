@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ClientRequestMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Client;
@@ -55,7 +56,6 @@ class createClientAndRequestController extends Controller
                 'generatedCode' => $clientData['generatedCode'],
                 'pdfPath' => $pdfPath,
             ];
-            Mail::to($clientData['email'])->send(new ClientWelcomeMail($emailData));
 
             // Send email to admin
             $adminEmailData = [
@@ -63,7 +63,9 @@ class createClientAndRequestController extends Controller
                 'pdfPath' => $pdfPath,
                 'clientRequest' => $clientRequest,
             ];
+            Mail::to($clientData['email'])->send(new ClientWelcomeMail($emailData));
             Mail::to('admin@example.com')->send(new AdminNotificationMail($adminEmailData));
+            Mail::to($clientData['email'])->send(new ClientRequestMail($adminEmailData));
 
             // Render PDF template with clientRequest data
             $pdfHtml = $this->pdfService->renderTemplate($clientRequest);

@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -10,16 +11,28 @@ class ClientRequestMail extends Mailable
     use Queueable, SerializesModels;
 
     public $client;
-    public $pdfUrl;
+    public $pdfPath;
+    public $clientRequest;
 
-    public function __construct($client, $pdfPath)
+    /**
+     * Create a new message instance.
+     *
+     * @param array $adminEmailData
+     */
+    public function __construct($adminEmailData)
     {
-        $this->client = $client;
-        $this->pdfUrl = asset($pdfPath);
+        $this->client = $adminEmailData['client'];
+        $this->pdfPath = $adminEmailData['pdfPath'];
+        $this->clientRequest = $adminEmailData['clientRequest'];
     }
 
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
     public function build()
     {
-        return $this->view('emails.client_request');
+        return $this->view('emails.client_notification');
     }
 }
