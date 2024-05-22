@@ -22,7 +22,7 @@ class  LoginController extends Controller
         // Retrieve the admin record based on the login
         $admin = Admin::where('login', $credentials['login'])->first();
 
-        // Check if admin record exists and if the provided password matches the hashed password
+        // Check if admin record exists and if the providepassword matches the hashed password
         if ($admin && Hash::check($credentials['password'], $admin->password)) {
             // Authenticate the admin
             Auth::guard('admin')->login($admin);
